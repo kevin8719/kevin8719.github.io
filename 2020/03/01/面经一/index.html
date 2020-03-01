@@ -1,0 +1,909 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="面经一, 程序猿">
+    <meta name="description" content="很普通的一个人">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>面经一 | kevin&#39;s blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">kevin's blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">kevin's blog</div>
+        <div class="logo-desc">
+            
+            很普通的一个人
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">面经一</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-03-01
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>基础相关：</p>
+<p>1.说下int和Integer的区别</p>
+<p>一个基本类型,一个对象,JDl1.5之前需要调用方法互相转,之后拆箱装箱,nt类的变量初始为0.而Integer的变量则初始化为null.</p>
+<p>2.Integer a=1,int b=1,Integer c=new Integer(1)这三个相等吗？</p>
+<p>不 ,对象地址</p>
+<p>3.说说有哪些Map和Set</p>
+<p>hashmap linkedhashmap treemap currenthashmap Hashtable  hashset treeset linkedhashset</p>
+<p>4.哪些是线程不安全的？哪些是线程安全的？线程安全的Set有哪些？</p>
+<p>CopyOnWriteArraySet是线程安全的set,该类是基于CopyOnWriteArrayList实现的，所以该类共享CopyOnWriteArrayList的基本属性,而且CopyOnWriteArrayList是通过ReentrantLock实现同步的.</p>
+<p>list进行遍历删除容易造成从而容易造成结果不准确甚至数组下标越界，更严重者还会抛出 <strong>ConcurrentModificationException</strong>的异常,因为,会改变集合的大小,源码级别就是<strong>modCount</strong>和<strong>expectedModCount</strong>俩个成员变量不相等</p>
+<p><strong>modCount</strong>:arraylist的增删改查modeCount都会加1,初始值为0</p>
+<p><strong>expectedModCount</strong>：代表对 ArrayList 修改次数的期望值</p>
+<p>5.map和set中有哪些有序的？</p>
+<p>treemap treeset  SortedMap是一个接口,TreeMap实现了sortedmap,是用键来进行升序顺序来排序的,通过Comparable 或 Comparator来排序</p>
+<p>然后TreeMap基于红黑树来存储键值对</p>
+<p>由于红黑树是一种特殊的二叉排序树，因此在插入节点时，需要进行节点间的比较，通过comparator实例可以自定义比较器。</p>
+<p>6.HashMap为什么线程不安全？</p>
+<p>现在假如A线程和B线程同时对同一个数组位置调用addEntry(put操作)，两个线程会同时得到现在的头结点，然后A写入新的头结点之后，B也写入新的头结点，那B的写入操作就会覆盖A的写入操作造成A的写入操作丢失</p>
+<p>7.ConcurrentHashMap为什么是线程安全的？</p>
+<p>segment数组互相不干扰,分段锁</p>
+<p>8.hashMap时间复杂度（说了链表o(n)红黑树O(logn)，说不是，）</p>
+<p>O(1)</p>
+<p>9.线程的生命周期</p>
+<p>新建,启动,开始,执行,销毁</p>
+<p>10.线程start后就会立刻执行吗</p>
+<p>11.interrupt了解吗？线程怎么中断的，执行interrupted，线程怎么中断的</p>
+<p>12.为什么要使用线程池？</p>
+<p>防止oom,效率高</p>
+<p>13.创建线程池的方式？（说是Exector类啥的）</p>
+<p>@Async并且配置ThreadPoolTaskExecutor对象参数,@bean交给Spring管理</p>
+<p>14.线程池中怎么创建线程的？</p>
+<p>15.线程中的线程如果执行完毕会一直存在吗？什么时候会被回收？</p>
+<p>16.超过核心线程池的大小并且超过keepalivetime的线程一定会被回收吗</p>
+<p>17.synchronized和Lock的区别</p>
+<p>18.Lock怎么响应中断的</p>
+<p>19.索引了解吗？Mysql有哪些索引</p>
+<p>底层b+树,主键,唯一,普通,联合</p>
+<p>20.主键索引和唯一索引的区别？</p>
+<ol start="21">
+<li>事务的特点</li>
+</ol>
+<p>22.事务隔离级别</p>
+<p>四种 读提交  读未提交   可重复读  可串行话</p>
+<p>23.网络协议有哪些</p>
+<p>tcp upd</p>
+<p>24.状态码有哪几种</p>
+<p>25.http使用的是哪种协议？为什么要使用这个协议</p>
+<ol start="26">
+<li>JVM内存有哪几块说说</li>
+</ol>
+<p>堆,方法区  线程共享</p>
+<p>jvm虚拟机栈,本地方法栈,程序计数器  线程私有</p>
+<p>27.堆有几块内存 </p>
+<p>Eden空间、From Survivor、To Survivor空间</p>
+<p>28.堆分为哪几块 </p>
+<p>三块</p>
+<p>28.垃圾回收器有哪几种？cms g1</p>
+<p>29.stw的垃圾回收期有哪几种（stop the world）</p>
+<p>29.说下G1垃圾回收器怎么工作的</p>
+<p>30.MQ了解吗 说说 有什么作用</p>
+<p>消息队列,削峰值,消息传输</p>
+<p>31.springboot原理</p>
+<p>32.springboot怎么启动的</p>
+<ol start="33">
+<li><p>springboot有很多starter，为什么引入了starter就可以做相关的操作，原理是什么</p>
+</li>
+<li><p>spring IOC和AOP的原理</p>
+</li>
+<li><p>反射了解吗 动态代理了解吗</p>
+</li>
+<li><p>设计模式了解哪些？</p>
+</li>
+</ol>
+<p>单例,代理,工厂,工厂方法,策略</p>
+<p>37.单例哪几种？</p>
+<p>懒汉和饿汉</p>
+<p>38.饿汉式和懒汉式的区别</p>
+<p>39.最近在学习哪些技术？</p>
+<p>40.不可重复读和幻读的区别?</p>
+<p>当然,  从总的结果来看,  似乎两者都表现为两次读取的结果不一致.</p>
+<p>但如果你从控制的角度来看,  两者的区别就比较大<br>对于前者,  只需要锁住满足条件的记录<br>对于后者,  要锁住满足条件及其相近的记录</p>
+<p>-———————————————————-</p>
+<p>我这么理解是否可以？<br>避免不可重复读需要锁行就行<br>避免幻影读则需要锁表</p>
+<p>不可重复读重点在于update和delete，而幻读的重点在于insert。</p>
+<ol start="41">
+<li><p>IO流,如果是想导出报表用到字节流还是字符流？具体是哪个?代码实现?</p>
+</li>
+<li><p>索引相关,平时用过索引吗?具体用了哪些索引?索引一定会提高数据库查询性能吗?</p>
+<p>联合索引,唯一索引,普通索引,不一定</p>
+</li>
+<li><p>mybatis中动态参数#{}和${}的区别?</p>
+<p>#会是jdbc进行预编译,防止sql注入,select* from tabl where = #{name}会将sql编译成select* from tabl where = ‘jack’,而$则不预编译而是直接赋值,select* from tabl where = jack</p>
+</li>
+<li><p>反转字符串</p>
+<p>1.char字符数组2.存入栈中,先进后出原理3.java自带api(reverse),4.递归,5.逆序遍历</p>
+</li>
+<li><p>谈谈你知道的设计模式？请手动实现单例模式，Spring 等框架中使用了哪些模式？</p>
+</li>
+<li><p>不要直接调用run()方法。总是调用Thread.start()方法，这个方法会创建一条新的线程并使新建的线程调用run()</p>
+</li>
+</ol>
+<p>47.数组的长度是有限制的，而ArrayList是可以存放任意数量对象，长度不受限制，那么他是怎么实现的呢？</p>
+<p>通过数组扩容的方式去实现的</p>
+<p>48.抽象类和接口为什么不能实例化?</p>
+<p>学过汇编你会知道,程序都有一个代码段,在内存中需要占据一定的内存,而抽象类和接口没有具体的实现方法,无法具体的给它分配内存空间,所以为了安全,所以JAVA不允许抽象类,接口直接实例化</p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://kevin8719.github.io" rel="external nofollow noreferrer">党文祥</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://kevin8719.github.io/2020/03/01/%E9%9D%A2%E7%BB%8F%E4%B8%80/">https://kevin8719.github.io/2020/03/01/%E9%9D%A2%E7%BB%8F%E4%B8%80/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://kevin8719.github.io" target="_blank">党文祥</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2020/03/01/%E9%9D%A2%E7%BB%8F%E4%B8%80/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="面经一">
+                        
+                        <span class="card-title">面经一</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            基础相关：
+1.说下int和Integer的区别
+一个基本类型,一个对象,JDl1.5之前需要调用方法互相转,之后拆箱装箱,nt类的变量初始为0.而Integer的变量则初始化为null.
+2.Integer a=1,int b=1,Int
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-01
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            党文祥
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/03/01/Java%E5%AE%9E%E7%8E%B0Sftp%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E5%8A%9F%E8%83%BD/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Java实现Sftp下载文件功能">
+                        
+                        <span class="card-title">Java实现Sftp下载文件功能</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            由于在业务中会经常有上传和下载的功能需要实现，所以掌握基本fileUpload技能是必不可少的。当然，从Sftp服务器下载文件并解析是和我们平时使用的从普通文件服务器下载文件是不同的，接下来，我就来一步一步做个记录。
+1.引入依赖包1234
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-01
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            党文祥
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="https://kevin8719.github.io" target="_blank">党文祥</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/kevin8719" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:kevin19950719@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=790101181" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 790101181" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
