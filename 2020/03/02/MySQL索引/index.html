@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="面经一, 程序猿">
+    <meta name="keywords" content="MySQL索引, 程序猿">
     <meta name="description" content="很普通的一个人">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>面经一 | kevin&#39;s blog</title>
+    <title>MySQL索引 | kevin&#39;s blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -201,7 +201,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">面经一</h1>
+                    <h1 class="description center-align post-title">MySQL索引</h1>
                 </div>
             </div>
         </div>
@@ -318,8 +318,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E9%9D%A2%E8%AF%95/">
-                                <span class="chip bg-color">面试</span>
+                            <a href="/tags/MySQL/">
+                                <span class="chip bg-color">MySQL</span>
                             </a>
                         
                     </div>
@@ -330,8 +330,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E9%9D%A2%E8%AF%95/" class="post-category">
-                                面试
+                            <a href="/categories/MySQL/" class="post-category">
+                                MySQL
                             </a>
                         
                     </div>
@@ -343,7 +343,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-01
+                    2020-03-02
                 </div>
                 
 
@@ -360,112 +360,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>基础相关：</p>
-<p>1.说下int和Integer的区别</p>
-<p>一个基本类型,一个对象,JDl1.5之前需要调用方法互相转,之后拆箱装箱,nt类的变量初始为0.而Integer的变量则初始化为null.</p>
-<p>2.Integer a=1,int b=1,Integer c=new Integer(1)这三个相等吗？</p>
-<p>不 ,对象地址</p>
-<p>3.说说有哪些Map和Set</p>
-<p>hashmap linkedhashmap treemap currenthashmap Hashtable  hashset treeset linkedhashset</p>
-<p>4.哪些是线程不安全的？哪些是线程安全的？线程安全的Set有哪些？</p>
-<p>CopyOnWriteArraySet是线程安全的set,该类是基于CopyOnWriteArrayList实现的，所以该类共享CopyOnWriteArrayList的基本属性,而且CopyOnWriteArrayList是通过ReentrantLock实现同步的.</p>
-<p>list进行遍历删除容易造成从而容易造成结果不准确甚至数组下标越界，更严重者还会抛出 <strong>ConcurrentModificationException</strong>的异常,因为,会改变集合的大小,源码级别就是<strong>modCount</strong>和<strong>expectedModCount</strong>俩个成员变量不相等</p>
-<p><strong>modCount</strong>:arraylist的增删改查modeCount都会加1,初始值为0</p>
-<p><strong>expectedModCount</strong>：代表对 ArrayList 修改次数的期望值</p>
-<p>5.map和set中有哪些有序的？</p>
-<p>treemap treeset  SortedMap是一个接口,TreeMap实现了sortedmap,是用键来进行升序顺序来排序的,通过Comparable 或 Comparator来排序</p>
-<p>然后TreeMap基于红黑树来存储键值对</p>
-<p>由于红黑树是一种特殊的二叉排序树，因此在插入节点时，需要进行节点间的比较，通过comparator实例可以自定义比较器。</p>
-<p>6.HashMap为什么线程不安全？</p>
-<p>现在假如A线程和B线程同时对同一个数组位置调用addEntry(put操作)，两个线程会同时得到现在的头结点，然后A写入新的头结点之后，B也写入新的头结点，那B的写入操作就会覆盖A的写入操作造成A的写入操作丢失</p>
-<p>7.ConcurrentHashMap为什么是线程安全的？</p>
-<p>segment数组互相不干扰,分段锁</p>
-<p>8.hashMap时间复杂度（说了链表o(n)红黑树O(logn)，说不是，）</p>
-<p>O(1)</p>
-<p>9.线程的生命周期</p>
-<p>新建,启动,开始,执行,销毁</p>
-<p>10.线程start后就会立刻执行吗</p>
-<p>11.interrupt了解吗？线程怎么中断的，执行interrupted，线程怎么中断的</p>
-<p>12.为什么要使用线程池？</p>
-<p>防止oom,效率高</p>
-<p>13.创建线程池的方式？（说是Exector类啥的）</p>
-<p>@Async并且配置ThreadPoolTaskExecutor对象参数,@bean交给Spring管理</p>
-<p>14.线程池中怎么创建线程的？</p>
-<p>15.线程中的线程如果执行完毕会一直存在吗？什么时候会被回收？</p>
-<p>16.超过核心线程池的大小并且超过keepalivetime的线程一定会被回收吗</p>
-<p>17.synchronized和Lock的区别</p>
-<p>18.Lock怎么响应中断的</p>
-<p>19.索引了解吗？Mysql有哪些索引</p>
-<p>底层b+树,主键,唯一,普通,联合</p>
-<p>20.主键索引和唯一索引的区别？</p>
-<ol start="21">
-<li>事务的特点</li>
-</ol>
-<p>22.事务隔离级别</p>
-<p>四种 读提交  读未提交   可重复读  可串行话</p>
-<p>23.网络协议有哪些</p>
-<p>tcp upd</p>
-<p>24.状态码有哪几种</p>
-<p>25.http使用的是哪种协议？为什么要使用这个协议</p>
-<ol start="26">
-<li>JVM内存有哪几块说说</li>
-</ol>
-<p>堆,方法区  线程共享</p>
-<p>jvm虚拟机栈,本地方法栈,程序计数器  线程私有</p>
-<p>27.堆有几块内存 </p>
-<p>Eden空间、From Survivor、To Survivor空间</p>
-<p>28.堆分为哪几块 </p>
-<p>三块</p>
-<p>28.垃圾回收器有哪几种？cms g1</p>
-<p>29.stw的垃圾回收期有哪几种（stop the world）</p>
-<p>29.说下G1垃圾回收器怎么工作的</p>
-<p>30.MQ了解吗 说说 有什么作用</p>
-<p>消息队列,削峰值,消息传输</p>
-<p>31.springboot原理</p>
-<p>32.springboot怎么启动的</p>
-<ol start="33">
-<li><p>springboot有很多starter，为什么引入了starter就可以做相关的操作，原理是什么</p>
-</li>
-<li><p>spring IOC和AOP的原理</p>
-</li>
-<li><p>反射了解吗 动态代理了解吗</p>
-</li>
-<li><p>设计模式了解哪些？</p>
-</li>
-</ol>
-<p>单例,代理,工厂,工厂方法,策略</p>
-<p>37.单例哪几种？</p>
-<p>懒汉和饿汉</p>
-<p>38.饿汉式和懒汉式的区别</p>
-<p>39.最近在学习哪些技术？</p>
-<p>40.不可重复读和幻读的区别?</p>
-<p>当然,  从总的结果来看,  似乎两者都表现为两次读取的结果不一致.</p>
-<p>但如果你从控制的角度来看,  两者的区别就比较大<br>对于前者,  只需要锁住满足条件的记录<br>对于后者,  要锁住满足条件及其相近的记录</p>
-<p>-———————————————————-</p>
-<p>我这么理解是否可以？<br>避免不可重复读需要锁行就行<br>避免幻影读则需要锁表</p>
-<p>不可重复读重点在于update和delete，而幻读的重点在于insert。</p>
-<ol start="41">
-<li><p>IO流,如果是想导出报表用到字节流还是字符流？具体是哪个?代码实现?</p>
-</li>
-<li><p>索引相关,平时用过索引吗?具体用了哪些索引?索引一定会提高数据库查询性能吗?</p>
-<p>联合索引,唯一索引,普通索引,不一定</p>
-</li>
-<li><p>mybatis中动态参数#{}和${}的区别?</p>
-<p>#会是jdbc进行预编译,防止sql注入,select* from tabl where = #{name}会将sql编译成select* from tabl where = ‘jack’,而$则不预编译而是直接赋值,select* from tabl where = jack</p>
-</li>
-<li><p>反转字符串</p>
-<p>1.char字符数组2.存入栈中,先进后出原理3.java自带api(reverse),4.递归,5.逆序遍历</p>
-</li>
-<li><p>谈谈你知道的设计模式？请手动实现单例模式，Spring 等框架中使用了哪些模式？</p>
-</li>
-<li><p>不要直接调用run()方法。总是调用Thread.start()方法，这个方法会创建一条新的线程并使新建的线程调用run()</p>
-</li>
-</ol>
-<p>47.数组的长度是有限制的，而ArrayList是可以存放任意数量对象，长度不受限制，那么他是怎么实现的呢？</p>
-<p>通过数组扩容的方式去实现的</p>
-<p>48.抽象类和接口为什么不能实例化?</p>
-<p>学过汇编你会知道,程序都有一个代码段,在内存中需要占据一定的内存,而抽象类和接口没有具体的实现方法,无法具体的给它分配内存空间,所以为了安全,所以JAVA不允许抽象类,接口直接实例化</p>
-
+                
             </div>
             <hr/>
 
@@ -490,7 +385,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://kevin8719.github.io/2020/03/01/%E9%9D%A2%E7%BB%8F%E4%B8%80/">https://kevin8719.github.io/2020/03/01/%E9%9D%A2%E7%BB%8F%E4%B8%80/</a>
+                    <a href="https://kevin8719.github.io/2020/03/02/MySQL%E7%B4%A2%E5%BC%95/">https://kevin8719.github.io/2020/03/02/MySQL%E7%B4%A2%E5%BC%95/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -528,8 +423,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E9%9D%A2%E8%AF%95/">
-                                    <span class="chip bg-color">面试</span>
+                                <a href="/tags/MySQL/">
+                                    <span class="chip bg-color">MySQL</span>
                                 </a>
                             
                         </div>
@@ -574,19 +469,20 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/03/02/MySQL%E7%B4%A2%E5%BC%95/">
+                <a href="/2020/03/02/Java%E5%AE%9E%E7%8E%B0sftp%E4%B8%8B%E8%BD%BD/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="MySQL索引">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="Java实现sftp下载">
                         
-                        <span class="card-title">MySQL索引</span>
+                        <span class="card-title">Java实现sftp下载</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            由于在业务中会经常有上传和下载的功能需要实现，所以掌握基本fileUpload技能是必不可少的。当然，从Sftp服务器下载文件并解析是和我们平时使用的从普通文件服务器下载文件是不同的，接下来，我就来一步一步做个记录。
+1.引入依赖包1234
                         
                     </div>
                     <div class="publish-info">
@@ -597,8 +493,8 @@
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/MySQL/" class="post-category">
-                                    MySQL
+                            <a href="/categories/Java%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    Java基础
                                 </a>
                             
                             
@@ -608,8 +504,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/MySQL/">
-                        <span class="chip bg-color">MySQL</span>
+                    <a href="/tags/Java%E5%9F%BA%E7%A1%80/">
+                        <span class="chip bg-color">Java基础</span>
                     </a>
                     
                 </div>
@@ -620,7 +516,7 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="/2020/03/01/%E9%9D%A2%E7%BB%8F%E4%B8%80/">
@@ -657,7 +553,6 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     

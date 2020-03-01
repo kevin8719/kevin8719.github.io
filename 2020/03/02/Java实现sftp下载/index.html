@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Java实现Sftp下载文件功能, 程序猿">
+    <meta name="keywords" content="Java实现sftp下载, 程序猿">
     <meta name="description" content="很普通的一个人">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Java实现Sftp下载文件功能 | kevin&#39;s blog</title>
+    <title>Java实现sftp下载 | kevin&#39;s blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -196,12 +196,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Java实现Sftp下载文件功能</h1>
+                    <h1 class="description center-align post-title">Java实现sftp下载</h1>
                 </div>
             </div>
         </div>
@@ -316,12 +316,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Java%E5%9F%BA%E7%A1%80/">
+                                <span class="chip bg-color">Java基础</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Java%E5%9F%BA%E7%A1%80/" class="post-category">
+                                Java基础
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -330,7 +343,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-01
+                    2020-03-02
                 </div>
                 
 
@@ -348,12 +361,12 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>由于在业务中会经常有上传和下载的功能需要实现，所以掌握基本fileUpload技能是必不可少的。当然，从Sftp服务器下载文件并解析是和我们平时使用的从普通文件服务器下载文件是不同的，接下来，我就来一步一步做个记录。</p>
-<h4 id="1-引入依赖包"><a href="#1-引入依赖包" target="_blank" rel="noopener" class="headerlink" title="1.引入依赖包"></a>1.引入依赖包</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https:<span class="comment">//mvnrepository.com/artifact/com.jcraft/jsch --&gt;</span></span><br><span class="line">&lt;dependency&gt;    </span><br><span class="line">    &lt;groupId&gt;com.jcraft&lt;/groupId&gt;    </span><br><span class="line">    &lt;artifactId&gt;jsch&lt;/artifactId&gt;    </span><br><span class="line">    &lt;version&gt;0.1.54&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="1-引入依赖包"><a href="#1-引入依赖包" class="headerlink" title="1.引入依赖包"></a>1.引入依赖包</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https:<span class="comment">//mvnrepository.com/artifact/com.jcraft/jsch --&gt;</span></span><br><span class="line">&lt;dependency&gt;    </span><br><span class="line">    &lt;groupId&gt;com.jcraft&lt;/groupId&gt;    </span><br><span class="line">    &lt;artifactId&gt;jsch&lt;/artifactId&gt;    </span><br><span class="line">    &lt;version&gt;0.1.54&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
 
-<h4 id="2-实现工具类"><a href="#2-实现工具类" target="_blank" rel="noopener" class="headerlink" title="2.实现工具类"></a>2.实现工具类</h4><p>jsch常用密码登陆和密钥认证的形式进行sftp服务器登陆 。</p>
+<h4 id="2-实现工具类"><a href="#2-实现工具类" class="headerlink" title="2.实现工具类"></a>2.实现工具类</h4><p>jsch常用密码登陆和密钥认证的形式进行sftp服务器登陆 。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.jcraft.jsch.*;</span><br><span class="line"><span class="keyword">import</span> lombok.extern.slf4j.Slf4j;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileNotFoundException;</span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.OutputStream;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="comment">//此处注解用来将本类交给Spring管理,也就是让Springboot启动类可以扫描到</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SFtpUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String NO_FILE = <span class="string">"No such file"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> ChannelSftp sftp = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Session sshSession = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String host;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> port;</span><br><span class="line">	<span class="comment">//输入自己的密码账号ip地址即可</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SFtpUtil</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.username = <span class="string">"*******"</span>;</span><br><span class="line">        <span class="keyword">this</span>.password = <span class="string">"*******"</span>;</span><br><span class="line">        <span class="keyword">this</span>.host = <span class="string">"*******"</span>;</span><br><span class="line">        <span class="keyword">this</span>.port = <span class="number">22</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 连接sftp服务器</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> ChannelSftp sftp类型</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ChannelSftp <span class="title">connect</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        log.info(<span class="string">"ftp连接开始host="</span> + host + <span class="string">"port"</span> + port + <span class="string">"username="</span> + username);</span><br><span class="line">        JSch jsch = <span class="keyword">new</span> JSch();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            jsch.getSession(username, host, port);</span><br><span class="line">            sshSession = jsch.getSession(username, host, port);</span><br><span class="line">            log.info(<span class="string">"ftp---Session created."</span>);</span><br><span class="line">            sshSession.setPassword(password);</span><br><span class="line">            Properties properties = <span class="keyword">new</span> Properties();</span><br><span class="line">            properties.put(<span class="string">"StrictHostKeyChecking"</span>, <span class="string">"no"</span>);</span><br><span class="line">            sshSession.setConfig(properties);</span><br><span class="line">            sshSession.connect();</span><br><span class="line">            log.info(<span class="string">"ftp---Session connected."</span>);</span><br><span class="line">            Channel channel = sshSession.openChannel(<span class="string">"sftp"</span>);</span><br><span class="line">            channel.connect();</span><br><span class="line">            log.info(<span class="string">"Opening Channel."</span>);</span><br><span class="line">            sftp = (ChannelSftp) channel;</span><br><span class="line">            log.info(<span class="string">"ftp---Connected to "</span> + host);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (JSchException e) &#123;</span><br><span class="line">            throw new BadRequestException(null, SFtpUtil.class.getSimpleName(), "connect异常" + e.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sftp;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="3-单个下载方法"><a href="#3-单个下载方法" target="_blank" rel="noopener" class="headerlink" title="3.单个下载方法"></a>3.单个下载方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 下载单个文件</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> directory      远程下载目录(以路径符号结束)</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> remoteFileName FTP服务器文件名称 如：xxx.txt ||xxx.txt.zip</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> localFile      本地文件路径 如 D:\\xxx.txt</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> BadRequestException  //自定义异常</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> File <span class="title">downloadFile</span><span class="params">(String directory, String remoteFileName, String localFile)</span></span>&#123;</span><br><span class="line">        log.info(<span class="string">"ftp下载文件"</span> + remoteFileName + <span class="string">"开始"</span>);</span><br><span class="line">        connect();</span><br><span class="line">        File file = <span class="keyword">null</span>;</span><br><span class="line">        OutputStream output = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            file = <span class="keyword">new</span> File(localFile);</span><br><span class="line">            <span class="keyword">if</span> (file.exists()) &#123;</span><br><span class="line">                file.delete();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">boolean</span> newFile = file.createNewFile();</span><br><span class="line">            <span class="comment">//进入FTP服务器文件目录</span></span><br><span class="line">            sftp.cd(directory);</span><br><span class="line">            output = <span class="keyword">new</span> FileOutputStream(file);</span><br><span class="line">            sftp.get(remoteFileName, output);</span><br><span class="line">            log.info(<span class="string">"DownloadFile:"</span> + remoteFileName + <span class="string">" success from sftp"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SftpException e) &#123;</span><br><span class="line">            <span class="keyword">if</span> (e.toString().equals(NO_FILE)) &#123;</span><br><span class="line">                log.info(<span class="string">"sftp下载文件失败"</span> + directory + remoteFileName + <span class="string">"不存在"</span>);</span><br><span class="line">                throw new BadRequestException(null, SFtpUtil.class.getSimpleName(), "ftp下			载文件失败" + directory + remoteFileName + "不存在");</span><br><span class="line">            &#125;</span><br><span class="line">            throw new BadRequestException(null, SFtpUtil.class.getSimpleName(), "ftp目录或			者文件异常，检查ftp目录和文件" + e.toString());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">            throw new BadRequestException(null, SFtpUtil.class.getSimpleName(), "本地目录异			常，请检查" + file.getPath() + e.getMessage());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            throw new BadRequestException(null, SFtpUtil.class.getSimpleName(), "创建本地文		件失败" + file.getPath() + e.getMessage());</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (output != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    output.close();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    throw new BadRequestException(null, SFtpUtil.class.getSimpleName(), 		"Close stream error." + e.getMessage());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            disconnect();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        log.info(<span class="string">"ftp下载文件结束"</span>);</span><br><span class="line">        <span class="keyword">return</span> file;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-单个下载方法"><a href="#3-单个下载方法" class="headerlink" title="3.单个下载方法"></a>3.单个下载方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 下载单个文件</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> directory      远程下载目录(以路径符号结束)</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> remoteFileName FTP服务器文件名称 如：xxx.txt ||xxx.txt.zip</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> localFile      本地文件路径 如 D:\\xxx.txt</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> BadRequestException  //自定义异常</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> File <span class="title">downloadFile</span><span class="params">(String directory, String remoteFileName, String localFile)</span></span>&#123;</span><br><span class="line">        log.info(<span class="string">"ftp下载文件"</span> + remoteFileName + <span class="string">"开始"</span>);</span><br><span class="line">        connect();</span><br><span class="line">        File file = <span class="keyword">null</span>;</span><br><span class="line">        OutputStream output = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            file = <span class="keyword">new</span> File(localFile);</span><br><span class="line">            <span class="keyword">if</span> (file.exists()) &#123;</span><br><span class="line">                file.delete();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">boolean</span> newFile = file.createNewFile();</span><br><span class="line">            <span class="comment">//进入FTP服务器文件目录</span></span><br><span class="line">            sftp.cd(directory);</span><br><span class="line">            output = <span class="keyword">new</span> FileOutputStream(file);</span><br><span class="line">            sftp.get(remoteFileName, output);</span><br><span class="line">            log.info(<span class="string">"DownloadFile:"</span> + remoteFileName + <span class="string">" success from sftp"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SftpException e) &#123;</span><br><span class="line">            <span class="keyword">if</span> (e.toString().equals(NO_FILE)) &#123;</span><br><span class="line">                log.info(<span class="string">"sftp下载文件失败"</span> + directory + remoteFileName + <span class="string">"不存在"</span>);</span><br><span class="line">                throw new BadRequestException(null, SFtpUtil.class.getSimpleName(), "ftp下			载文件失败" + directory + remoteFileName + "不存在");</span><br><span class="line">            &#125;</span><br><span class="line">            throw new BadRequestException(null, SFtpUtil.class.getSimpleName(), "ftp目录或			者文件异常，检查ftp目录和文件" + e.toString());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">            throw new BadRequestException(null, SFtpUtil.class.getSimpleName(), "本地目录异			常，请检查" + file.getPath() + e.getMessage());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            throw new BadRequestException(null, SFtpUtil.class.getSimpleName(), "创建本地文		件失败" + file.getPath() + e.getMessage());</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (output != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    output.close();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    throw new BadRequestException(null, SFtpUtil.class.getSimpleName(), 		"Close stream error." + e.getMessage());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            disconnect();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        log.info(<span class="string">"ftp下载文件结束"</span>);</span><br><span class="line">        <span class="keyword">return</span> file;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
 <p>4.关闭连接</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">disconnect</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.sftp != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.sftp.isConnected()) &#123;</span><br><span class="line">                <span class="keyword">this</span>.sftp.disconnect();</span><br><span class="line">                <span class="keyword">this</span>.sftp = <span class="keyword">null</span>;</span><br><span class="line">                log.info(<span class="string">"sftp is closed already"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.sshSession != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.sshSession.isConnected()) &#123;</span><br><span class="line">                <span class="keyword">this</span>.sshSession.disconnect();</span><br><span class="line">                <span class="keyword">this</span>.sshSession = <span class="keyword">null</span>;</span><br><span class="line">                log.info(<span class="string">"sshSession is closed already"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
@@ -383,7 +396,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://kevin8719.github.io/2020/03/01/Java%E5%AE%9E%E7%8E%B0Sftp%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E5%8A%9F%E8%83%BD/">https://kevin8719.github.io/2020/03/01/Java%E5%AE%9E%E7%8E%B0Sftp%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E5%8A%9F%E8%83%BD/</a>
+                    <a href="https://kevin8719.github.io/2020/03/02/Java%E5%AE%9E%E7%8E%B0sftp%E4%B8%8B%E8%BD%BD/">https://kevin8719.github.io/2020/03/02/Java%E5%AE%9E%E7%8E%B0sftp%E4%B8%8B%E8%BD%BD/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -420,7 +433,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/Java%E5%9F%BA%E7%A1%80/">
+                                    <span class="chip bg-color">Java基础</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -459,57 +476,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/03/01/%E9%9D%A2%E7%BB%8F%E4%B8%80/">
+                <a href="/2020/03/02/Java%E5%AE%9E%E7%8E%B0sftp%E4%B8%8B%E8%BD%BD/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="面经一">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="Java实现sftp下载">
                         
-                        <span class="card-title">面经一</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            基础相关：
-1.说下int和Integer的区别
-一个基本类型,一个对象,JDl1.5之前需要调用方法互相转,之后拆箱装箱,nt类的变量初始为0.而Integer的变量则初始化为null.
-2.Integer a=1,int b=1,Int
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-01
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            党文祥
-                            
-                        </span>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/03/01/Java%E5%AE%9E%E7%8E%B0Sftp%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E5%8A%9F%E8%83%BD/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Java实现Sftp下载文件功能">
-                        
-                        <span class="card-title">Java实现Sftp下载文件功能</span>
+                        <span class="card-title">Java实现sftp下载</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -521,17 +499,78 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-01
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-02
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            党文祥
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Java%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    Java基础
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
 
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Java%E5%9F%BA%E7%A1%80/">
+                        <span class="chip bg-color">Java基础</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/03/02/MySQL%E7%B4%A2%E5%BC%95/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="MySQL索引">
+                        
+                        <span class="card-title">MySQL索引</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-02
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/MySQL/" class="post-category">
+                                    MySQL
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/MySQL/">
+                        <span class="chip bg-color">MySQL</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
