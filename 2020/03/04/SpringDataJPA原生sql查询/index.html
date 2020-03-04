@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="mysql中的锁, 程序猿">
+    <meta name="keywords" content="SpringDataJPA原生sql查询, 程序猿">
     <meta name="description" content="很普通的一个人">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>mysql中的锁 | kevin&#39;s blog</title>
+    <title>SpringDataJPA原生sql查询 | kevin&#39;s blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -196,12 +196,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">mysql中的锁</h1>
+                    <h1 class="description center-align post-title">SpringDataJPA原生sql查询</h1>
                 </div>
             </div>
         </div>
@@ -318,8 +318,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/MySQL/">
-                                <span class="chip bg-color">MySQL</span>
+                            <a href="/tags/JPA/">
+                                <span class="chip bg-color">JPA</span>
                             </a>
                         
                     </div>
@@ -330,8 +330,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/MySQL/" class="post-category">
-                                MySQL
+                            <a href="/categories/%E6%8C%81%E4%B9%85%E5%B1%82/" class="post-category">
+                                持久层
                             </a>
                         
                     </div>
@@ -343,7 +343,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-02
+                    2020-03-04
                 </div>
                 
 
@@ -360,34 +360,27 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>在计算机科学中，锁是在执行多线程时用于强行限制资源访问的同步机制，即用于在并发控制中保证对互斥要求的满足。</p>
-<p>了解Java的人都清楚,在高并发或者异步任务中的锁机制异常重要,当然当我们访问持久层数据库的时候,也会有很多类似锁机制,就拿MySQL来说就有乐观锁、悲观锁、共享锁、排它锁、行锁、表锁等,于是今天就对这几个概念进行学习一下.</p>
-<h4 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h4><p>乐观锁不是数据库自带的，需要我们自己去实现。乐观锁是指操作数据库时(更新操作)，想法很乐观，认为这次的操作不会导致冲突，在操作数据时，并不进行任何其他的特殊处理（也就是不加锁），而在进行更新后，再去判断是否有冲突了。</p>
-<p>通常实现是这样的：在表中的数据进行操作时(更新)，先给数据表加一个版本(version)字段，每操作一次，将那条记录的版本号加1。也就是先查询出那条记录，获取出version字段,如果要对那条记录进行操作(更新),则先判断此刻version的值是否与刚刚查询出来时的version的值相等，如果相等，则说明这段期间，没有其他程序对其进行操作，则可以执行更新，将version字段的值加1；如果更新时发现此刻的version值与刚刚获取出来的version的值不相等，则说明这段期间已经有其他程序对其进行操作了，则不进行更新操作。</p>
-<p>当然还有一种方式是使用时间戳（timestamp),也是在更新提交的时候检查当前数据库中数据的时间戳和自己更新前取到的时间戳进行对比，如果一致则OK，否则就是数据冲突.</p>
-<h5 id="eg"><a href="#eg" class="headerlink" title="eg:"></a>eg:</h5><p>1.三个字段，分别是<code>id,value、version</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select id,value,version from TABLE where id&#x3D;#&#123;id&#125;</span><br></pre></td></tr></table></figure>
+                <p>随着技术的发展,持久层框架也越来越趋于成熟,从Mybatis到JPA,新的技术都是使我们使用起来更加方便简单.就拿</p>
+<p>JPA来说,由于JPA自带的方法可以满足大部分日常开发中的crud,所以深得程序员们的喜爱,但是,有利就有弊.</p>
+<p>近日我在开发中就遇到了一个关于查询效率缓慢的问题.</p>
+<p>问题描述:</p>
+<p>1.在开发环境有个业务,列表页加搜索框功能,然后列表中数据是使用JPA的findAll()方法查询2万数据,竟然整整需要7s,JPA虽然好用简便,但是findall相当于是 SELECT * FROM tb where a,b,c,这种全表扫描效率低是肯定的,而且是把表中所有字段都查了一遍,分页后依旧不是很快,但是业务中只需要几个字段而已,这其实就是极大的耗费资源.</p>
+<p>2.自定义sql语句下where条件该如何拼接并且判空,类似于mybatis的if null</p>
+<p>3.自定义sql语句下如何进行分页</p>
+<p>解决方案:</p>
+<p>1.此刻加索引肯定是不行的,where条件并不固定(所有搜索框为空时是全查),所以就想到了利用JPA的@Query功能,将select * 替换为具体需要的字段,select a,b,c from tb,就是写原生sql语句,此时效率瞬间提高了不少,大概耗时1.2s,所以select * from tb 能不用则不用吧.性能问题解决了</p>
+<p>2.where条件的判空,就是当条件不为null时进行查询,结合google加实践我弄出了这个方法:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Query</span>(value = <span class="string">" select name,age,sex where if(?1!= '',name = ?1,1=1) and if(?2!= null,age = ?2,1=1)"</span>, nativeQuery = <span class="keyword">true</span>)</span><br><span class="line"> List&lt;Object[]&gt; countCase(String name, Integer age, String sex)</span><br></pre></td></tr></table></figure>
 
-<p>2、每次更新表中的value字段时，为了防止发生冲突，需要这样操作</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">update TABLE</span><br><span class="line">set value&#x3D;2,version&#x3D;version+1</span><br><span class="line">where id&#x3D;#&#123;id&#125; and version&#x3D;#&#123;version&#125;;</span><br></pre></td></tr></table></figure>
+<p>if(?1 !=’’,name=?1,1=1) 代表传入的参数name如果不为””（String类型空是””而不是null）将参数传入name，如果为空时显示1=1 代表参数为真，对查询结果不产生作用,所传参数顺序有要求.</p>
+<p>3.查看文档之后决定直接用JpaRepository 的 Pageable 来直接实现:</p>
+<p>参考文档[Example 51. Declare native count queries for pagination at the query method using <a href="https://my.oschina.net/u/196373" target="_blank" rel="noopener">@Query</a>]</p>
+<p>(<a href="https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.at-query" target="_blank" rel="noopener">https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.at-query</a>)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Query</span>(value = <span class="string">" select name,age,sex where if(?1!= '',name = ?1,1=1) and if(?2!= null,age = ?2,1=1) /*#pageable*/"</span>,countQuery = <span class="string">"select count(*) where if(?1!= '',name = ?1,1=1) and if(?2!= null,age = ?2,1=1)"</span>,nativeQuery = <span class="keyword">true</span>)</span><br><span class="line"> Page&lt;Object[]&gt; countCase(String name, Integer age, String sex,Pageable pageable)</span><br></pre></td></tr></table></figure>
 
-<h5 id="tips"><a href="#tips" class="headerlink" title="tips:"></a>tips:</h5><p>除了自己手动实现乐观锁之外，现在网上许多框架已经封装好了乐观锁的实现，如hibernate，需要时，可能自行搜索”hiberate 乐观锁”试试看。</p>
-<h4 id="悲观锁"><a href="#悲观锁" class="headerlink" title="悲观锁"></a>悲观锁</h4><p>与乐观锁相对应的就是悲观锁了。悲观锁就是在操作数据时，认为此操作会出现数据冲突，所以在进行每次操作时都要通过获取锁才能进行对相同数据的操作，这点跟java中的synchronized很相似，所以悲观锁需要耗费较多的时间。另外与乐观锁相对应的，悲观锁是由数据库自己实现了的，要用的时候，我们直接调用数据库的相关语句就可以了。</p>
-<p>如果没有悲观锁,当涉及电商秒杀之类的场景时,多线程并发情况下，会存在超卖的可能。</p>
-<p>说到这里，由悲观锁涉及到的另外两个锁概念就出来了，它们就是共享锁与排它锁。共享锁和排它锁是悲观锁的不同的实现，它俩都属于悲观锁的范畴。</p>
-<h5 id="eg-1"><a href="#eg-1" class="headerlink" title="eg:"></a>eg:</h5><p>select name from tbl  where id=1 for update;我们通过select…for update这种方式，这样就通过数据库实现了悲观锁.</p>
-<h5 id="tips-1"><a href="#tips-1" class="headerlink" title="tips:"></a>tips:</h5><p>要使用悲观锁，我们必须关闭mysql数据库的自动提交属性，因为MySQL默认使用autocommit模式，也就是说，当你执行一个更新操作后，MySQL会立刻将结果进行提交。我们可以使用命令设置MySQL为非autocommit模式：set autocommit=0;</p>
-<p>使用select…for update会把数据给锁住，不过我们需要注意一些锁的级别，MySQL InnoDB默认Row-Level Lock，所以只有「明确」地指定主键或者索引，MySQL 才会执行Row lock (只锁住被选取的数据) ，否则MySQL 将会执行Table Lock (将整个数据表单给锁住)。</p>
-<h4 id="共享锁"><a href="#共享锁" class="headerlink" title="共享锁"></a>共享锁</h4><p>共享锁指的就是对于多个不同的事务，对同一个资源共享同一个锁。就像对于同一个保险箱，它拥有多个钥匙一样,允许不同事务加共享锁读取，但不允许其它事务修改或者加入排他锁,如果有修改必须等待一个事务提交完成才可以执行。</p>
-<h5 id="eg-2"><a href="#eg-2" class="headerlink" title="eg:"></a>eg:</h5><p>select name from tbl  where id=1 lock in share mode;共享锁的实现就是通过在执行语句后面加上lock in share mode就代表对某些记录加上共享锁了。</p>
-<p>那么证明，对于id=9555的记录加锁成功了，在上一条记录还没有commit之前，这条记录被锁住了，只有在上一个事务释放掉锁后才能进行操作，或用共享锁才能对此数据进行操作。</p>
-<h4 id="排它锁"><a href="#排它锁" class="headerlink" title="排它锁"></a>排它锁</h4><p>排它锁与共享锁相对应，就是指对于多个不同的事务，对同一个资源只能有一把锁,自身事务可以进行读和写，其他事务无权限,实现方式与共享锁类似，在需要执行的语句后面加上for update就可以了</p>
-<h4 id="行锁"><a href="#行锁" class="headerlink" title="行锁"></a>行锁</h4><p>行锁，仅对指定的一行记录进行加锁，这样其它进程还是可以对同一个表中的其它记录进行操作。比如之前演示的共享锁语句,SELECT * from city where id = “1”  lock in share mode; </p>
-<p>由于对于city表中,id字段为主键，就也相当于索引。执行加锁时，会将id这个索引为1的记录加上锁，那么这个锁就是行锁。</p>
-<h4 id="表锁"><a href="#表锁" class="headerlink" title="表锁"></a>表锁</h4><p>表锁，直接锁定整张表，在你锁定期间，其它进程无法对该表进行写操作。如果某次事务加了排它锁，则其它进程读也不允许</p>
-<h4 id="页锁"><a href="#页锁" class="headerlink" title="页锁"></a>页锁</h4><p>页级，表级锁速度快，但冲突多，行级冲突少，但速度慢。所以取了折衷的页级，一次锁定相邻的一组记录。</p>
-<p>通过查阅资料,上述三种锁的特性可大致归纳如下：<br>1） 表级锁：开销小，加锁快；不会出现死锁；锁定粒度大，发生锁冲突的概率最高，并发度最低。<br>2） 行级锁：开销大，加锁慢；会出现死锁；锁定粒度最小，发生锁冲突的概率最低，并发度也最高。<br>3） 页面锁：开销和加锁时间界于表锁和行锁之间；会出现死锁；锁定粒度界于表锁和行锁之间，并发度一般。</p>
-<p>其实，在这些知识里面，还有一个叫做MVCC的东西，因为锁是一个非常耗性能的东西，每次都得去加锁和释放锁，为了提高数据库的并发性，所以出现了MVCC，这个我也不清楚,后面再探讨吧。</p>
+<p>countQuery用来获取总条数</p>
+<p>/<em>#pageable</em>/在此处时必须添加,推测是JPA可能需要pageable字符来使工程正常启动,如果不加则会启动发生异常.</p>
+<p><em>以上仅限于mysql</em></p>
 
             </div>
             <hr/>
@@ -413,7 +406,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://kevin8719.github.io/2020/03/02/mysql%E4%B8%AD%E7%9A%84%E9%94%81/">https://kevin8719.github.io/2020/03/02/mysql%E4%B8%AD%E7%9A%84%E9%94%81/</a>
+                    <a href="https://kevin8719.github.io/2020/03/04/SpringDataJPA%E5%8E%9F%E7%94%9Fsql%E6%9F%A5%E8%AF%A2/">https://kevin8719.github.io/2020/03/04/SpringDataJPA%E5%8E%9F%E7%94%9Fsql%E6%9F%A5%E8%AF%A2/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -451,8 +444,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/MySQL/">
-                                    <span class="chip bg-color">MySQL</span>
+                                <a href="/tags/JPA/">
+                                    <span class="chip bg-color">JPA</span>
                                 </a>
                             
                         </div>
@@ -493,9 +486,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2020/03/04/SpringDataJPA%E5%8E%9F%E7%94%9Fsql%E6%9F%A5%E8%AF%A2/">
                     <div class="card-image">
@@ -515,9 +509,9 @@ JPA来说,由于JPA自带的方法可以满足大部分日常开发中的crud,�
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-04
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-04
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -530,6 +524,7 @@ JPA来说,由于JPA自带的方法可以满足大部分日常开发中的crud,�
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -548,20 +543,20 @@ JPA来说,由于JPA自带的方法可以满足大部分日常开发中的crud,�
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/03/02/Java%E5%AE%9E%E7%8E%B0sftp%E4%B8%8B%E8%BD%BD/">
+                <a href="/2020/03/02/mysql%E4%B8%AD%E7%9A%84%E9%94%81/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="Java实现sftp下载">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="mysql中的锁">
                         
-                        <span class="card-title">Java实现sftp下载</span>
+                        <span class="card-title">mysql中的锁</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            由于在业务中会经常有上传和下载的功能需要实现，所以掌握基本fileUpload技能是必不可少的。当然，从Sftp服务器下载文件并解析是和我们平时使用的从普通文件服务器下载文件是不同的，接下来，我就来一步一步做个记录。
-1.引入依赖包1234
+                            在计算机科学中，锁是在执行多线程时用于强行限制资源访问的同步机制，即用于在并发控制中保证对互斥要求的满足。
+了解Java的人都清楚,在高并发或者异步任务中的锁机制异常重要,当然当我们访问持久层数据库的时候,也会有很多类似锁机制,就拿MySQ
                         
                     </div>
                     <div class="publish-info">
@@ -572,8 +567,8 @@ JPA来说,由于JPA自带的方法可以满足大部分日常开发中的crud,�
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Java%E5%9F%BA%E7%A1%80/" class="post-category">
-                                    Java基础
+                            <a href="/categories/MySQL/" class="post-category">
+                                    MySQL
                                 </a>
                             
                             
@@ -583,8 +578,8 @@ JPA来说,由于JPA自带的方法可以满足大部分日常开发中的crud,�
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Java%E5%9F%BA%E7%A1%80/">
-                        <span class="chip bg-color">Java基础</span>
+                    <a href="/tags/MySQL/">
+                        <span class="chip bg-color">MySQL</span>
                     </a>
                     
                 </div>
