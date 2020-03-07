@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="SpringDataJPA原生sql查询, 程序猿">
+    <meta name="keywords" content="JVM(一)java内存区域, 程序猿">
     <meta name="description" content="很普通的一个人">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>SpringDataJPA原生sql查询 | kevin&#39;s blog</title>
+    <title>JVM(一)java内存区域 | kevin&#39;s blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -196,12 +196,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">SpringDataJPA原生sql查询</h1>
+                    <h1 class="description center-align post-title">JVM(一)java内存区域</h1>
                 </div>
             </div>
         </div>
@@ -318,8 +318,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/JPA/">
-                                <span class="chip bg-color">JPA</span>
+                            <a href="/tags/JVM/">
+                                <span class="chip bg-color">JVM</span>
                             </a>
                         
                     </div>
@@ -330,8 +330,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%8C%81%E4%B9%85%E5%B1%82/" class="post-category">
-                                持久层
+                            <a href="/categories/Java%E8%99%9A%E6%8B%9F%E6%9C%BA/" class="post-category">
+                                Java虚拟机
                             </a>
                         
                     </div>
@@ -343,7 +343,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-04
+                    2020-03-07
                 </div>
                 
 
@@ -360,27 +360,78 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>随着技术的发展,持久层框架也越来越趋于成熟,从Mybatis到JPA,新的技术都是使我们使用起来更加方便简单.就拿</p>
-<p>JPA来说,由于JPA自带的方法可以满足大部分日常开发中的crud,所以深得程序员们的喜爱,但是,有利就有弊.</p>
-<p>近日我在开发中就遇到了一个关于查询效率缓慢的问题.</p>
-<p>问题描述:</p>
-<p>1.在开发环境有个业务,列表页加搜索框功能,然后列表中数据是使用JPA的findAll()方法查询2万数据,竟然整整需要7s,JPA虽然好用简便,但是findall相当于是 SELECT * FROM tb where a,b,c,这种全表扫描效率低是肯定的,而且是把表中所有字段都查了一遍,分页后依旧不是很快,但是业务中只需要几个字段而已,这其实就是极大的耗费资源.</p>
-<p>2.自定义sql语句下where条件该如何拼接并且判空,类似于mybatis的if null</p>
-<p>3.自定义sql语句下如何进行分页</p>
-<p>解决方案:</p>
-<p>1.此刻加索引肯定是不行的,where条件并不固定(所有搜索框为空时是全查),所以就想到了利用JPA的@Query功能,将select * 替换为具体需要的字段,select a,b,c from tb,就是写原生sql语句,此时效率瞬间提高了不少,大概耗时1.2s,所以select * from tb 能不用则不用吧.性能问题解决了</p>
-<p>2.where条件的判空,就是当条件不为null时进行查询,结合google加实践我弄出了这个方法:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Query</span>(value = <span class="string">" select name,age,sex where if(?1!= '',name = ?1,1=1) and if(?2!= null,age = ?2,1=1)"</span>, nativeQuery = <span class="keyword">true</span>)</span><br><span class="line"> List&lt;Object[]&gt; countCase(String name, Integer age, String sex)</span><br></pre></td></tr></table></figure>
-
-<p>if(?1 !=’’,name=?1,1=1) 代表传入的参数name如果不为””（String类型空是””而不是null）将参数传入name，如果为空时显示1=1 代表参数为真，对查询结果不产生作用,所传参数顺序有要求.</p>
-<p>3.查看文档之后决定直接用JpaRepository 的 Pageable 来直接实现:</p>
-<p>参考文档[Example 51. Declare native count queries for pagination at the query method using <a href="https://my.oschina.net/u/196373" target="_blank" rel="noopener">@Query</a>]</p>
-<p>(<a href="https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.at-query" target="_blank" rel="noopener">https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.at-query</a>)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Query</span>(value = <span class="string">" select name,age,sex where if(?1!= '',name = ?1,1=1) and if(?2!= null,age = ?2,1=1) /*#pageable*/"</span>,countQuery = <span class="string">"select count(*) where if(?1!= '',name = ?1,1=1) and if(?2!= null,age = ?2,1=1)"</span>,nativeQuery = <span class="keyword">true</span>)</span><br><span class="line"> Page&lt;Object[]&gt; countCase(String name, Integer age, String sex,Pageable pageable)</span><br></pre></td></tr></table></figure>
-
-<p>countQuery用来获取总条数</p>
-<p>/<em>#pageable</em>/在此处时必须添加,推测是JPA可能需要pageable字符来使工程正常启动,如果不加则会启动发生异常.</p>
-<p><em>以上仅限于mysql</em></p>
+                <h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><p>java与c++之间有一堵由内存动态分配和垃圾回收机制技术所围城的“高墙”,墙外面的人想进来，墙里面的人想出去。对于每一个java程序员来说，在虚拟机自动内存管理机制下，不再需要每一个new操作都执行配对的delete/free代码，也不容易出现内存泄露和内存溢出问题，由虚拟机管理内存，这一切都看起来非常美妙。到那时一旦出现内存泄露和溢出方面的问题，如果不了解虚拟机是怎么样使用内存的，那么排查错误将会成为一项异常艰难的工作。</p>
+<h4 id="2-运行时数据区域"><a href="#2-运行时数据区域" class="headerlink" title="2.运行时数据区域"></a>2.运行时数据区域</h4><p>java虚拟机在执行java程序的过程中会把他所管理的内存划分为个干不同的数据区域<img src="D:%5Cblog_image%5C331425-20160623115845438-670228585.png" alt=""></p>
+<h4 id="3-程序计数器"><a href="#3-程序计数器" class="headerlink" title="3.程序计数器"></a>3.程序计数器</h4><p>程序计数器是一块较小的内存空间，可以看作是当前线程所执行的字节码的行号指示器，用来记录当前正在执行的指令，在JVM中也是如此。程序计数器是线程私有，所以当一个新的线程创建时，程序计数器也会创建。如果当前线程正在执行的方法是本地方法，那么此刻程序计数器的值为undefined。如果当前线程执行的是一个java方法，这个计数器记录的是正在执行的虚拟机字节码指令的地址。注意这个区域是唯一一个不抛出OutOfMemoryError的运行时数据区。</p>
+<h4 id="4-Java虚拟机栈"><a href="#4-Java虚拟机栈" class="headerlink" title="4.Java虚拟机栈"></a>4.Java虚拟机栈</h4><p>与程序计数器一样，Java虚拟机栈（Java Virtual Machine Stacks）也是线程私有的，它的生命周期与线程相同。虚拟机栈描述的是Java方法执行的内存模型：每个方法被执行的时候都会同时创建一个栈帧（Stack Frame）用于存储局部变量表、操作栈、动态链接、方法出口等信息。每一个方法被调用直至执行完成的过程，就对应着一个栈帧在虚拟机栈中从入栈到出栈的过程。</p>
+<p>其中，运行时栈帧介绍主要包括：</p>
+<ul>
+<li><strong>0.栈帧的概念</strong></li>
+<li><strong>1.局部变量表</strong></li>
+<li><strong>2.操作数栈</strong></li>
+<li><strong>3.动态链接</strong></li>
+<li><strong>4.方法返回</strong></li>
+<li><strong>5.附加信息</strong></li>
+</ul>
+<p>一个线程中方法的调用链可能会很长，很多方法都同时处于执行状态。对于JVM执行引擎来说，在在活动线程中，只有位于JVM虚拟机栈栈顶的元素才是有效的，即称为<strong>当前栈帧</strong>，与这个栈帧相关连的方法称为<strong>当前方法，</strong>定义这个方法的类叫做<strong>当前类</strong>。</p>
+<p>执行引擎运行的所有字节码指令都只针对当前栈帧进行操作。如果当前方法调用了其他方法，或者当前方法执行结束，那这个方法的栈帧就不再是当前栈帧了。</p>
+<p>调用新的方法时，新的栈帧也会随之创建。并且随着程序控制权转移到新方法，新的栈帧成为了当前栈帧。方法返回之际，原栈帧会返回方法的执行结果给之前的栈帧(返回给方法调用者)，随后虚拟机将会丢弃此栈帧。</p>
+<blockquote>
+<p>栈帧是线程本地的私有数据，不可能在一个栈帧中引用另外一个线程的栈帧。  </p>
+</blockquote>
+<ol>
+<li><h6 id="局部变量表"><a href="#局部变量表" class="headerlink" title="局部变量表"></a>局部变量表</h6><p>局部变量表(Local Variable Table)**是一组变量值存储空间，用于存放编译期可知的各种基本数据类型（boolean、byte、char、short、int、float、long、double）、对象引用（reference类型，它不等同于对象本身，根据不同的虚拟机实现，它可能是一个指向对象起始地址的引用指针，也可能指向一个代表对象的句柄或者其他与此对象相关的位置）和returnAddress类型（指向了一条字节码指令的地址）。局部变量表的容量以变量槽(Variable Slot)为最小单位，Java虚拟机规范并没有定义一个槽所应该占用内存空间的大小，但是规定了一个槽应该可以存放一个32位以内的数据类型。</p>
+<p>其中64位长度的long和double类型的数据会占用2个局部变量空间（Slot），其余的数据类型只占用1个。局部变量表所需的内存空间在编译期间完成分配，当进入一个方法时，这个方法需要在帧中分配多大的局部变量空间是完全确定的，在方法运行期间不会改变局部变量表的大小。</p>
+</li>
+<li><h6 id="操作数栈"><a href="#操作数栈" class="headerlink" title="操作数栈"></a>操作数栈</h6><p><strong>操作数栈(Operand Stack)</strong>也常称为操作栈，它是一个后入先出栈(LIFO)。同局部变量表一样，操作数栈的最大深度也在编译的时候写入到方法的Code属性的max_stacks数据项中。</p>
+<p>操作数栈的每一个元素可以是任意Java数据类型，32位的数据类型占一个栈容量，64位的数据类型占2个栈容量,且在方法执行的任意时刻，操作数栈的深度都不会超过max_stacks中设置的最大值。</p>
+<p>当一个方法刚刚开始执行时，其操作数栈是空的，随着方法执行和字节码指令的执行，会从局部变量表或对象实例的字段中复制常量或变量写入到操作数栈，再随着计算的进行将栈中元素出栈到局部变量表或者返回给方法调用者，也就是出栈/入栈操作。一个完整的方法执行期间往往包含多个这样出栈/入栈的过程。</p>
+</li>
+<li><h6 id="动态连接"><a href="#动态连接" class="headerlink" title="动态连接"></a>动态连接</h6><p>在一个class文件中，一个方法要调用其他方法，需要将这些方法的符号引用转化为其在内存地址中的直接引用，而符号引用存在于方法区中的运行时常量池。</p>
+<p>Java虚拟机栈中，每个栈帧都包含一个指向运行时常量池中该栈所属方法的符号引用，持有这个引用的目的是为了支持方法调用过程中的<strong>动态连接(Dynamic Linking)</strong>。</p>
+<p>这些符号引用一部分会在类加载阶段或者第一次使用时就直接转化为直接引用，这类转化称为<strong>静态解析</strong>。另一部分将在每次运行期间转化为直接引用，这类转化称为动态连接。</p>
+</li>
+<li><h6 id="方法返回"><a href="#方法返回" class="headerlink" title="方法返回"></a>方法返回</h6><p><strong>当一个方法开始执行时，可能有两种方式退出该方法：</strong></p>
+<ul>
+<li><strong>正常完成出口</strong></li>
+<li><strong>异常完成出口</strong></li>
+</ul>
+<p><strong>正常完成出口</strong>是指方法正常完成并退出，没有抛出任何异常(包括Java虚拟机异常以及执行时通过throw语句显示抛出的异常)。如果当前方法正常完成，则根据当前方法返回的字节码指令，这时有可能会有返回值传递给方法调用者(调用它的方法)，或者无返回值。具体是否有返回值以及返回值的数据类型将根据该方法返回的字节码指令确定。</p>
+<p><strong>异常完成出口</strong>是指方法执行过程中遇到异常，并且这个异常在方法体内部没有得到处理，导致方法退出。</p>
+<blockquote>
+<p>无论是Java虚拟机抛出的异常还是代码中使用athrow指令产生的异常，只要在本方法的异常表中没有搜索到相应的异常处理器，就会导致方法退出。</p>
+</blockquote>
+<p>无论方法采用何种方式退出，在方法退出后都需要返回到方法被调用的位置，程序才能继续执行，方法返回时可能需要在当前栈帧中保存一些信息，用来帮他恢复它的上层方法执行状态。</p>
+<blockquote>
+<p>方法退出过程实际上就等同于把当前栈帧出栈，因此退出可以执行的操作有：恢复上层方法的局部变量表和操作数栈，把返回值(如果有的话)压如调用者的操作数栈中，调整PC计数器的值以指向方法调用指令后的下一条指令。</p>
+</blockquote>
+<p>一般来说，方法正常退出时，调用者的PC计数值可以作为返回地址，栈帧中可能保存此计数值。而方法异常退出时，返回地址是通过异常处理器表确定的，栈帧中一般不会保存此部分信息。</p>
+<h6 id="5-附加信息"><a href="#5-附加信息" class="headerlink" title="5.附加信息"></a>5.附加信息</h6><p>虚拟机规范允许具体的虚拟机实现增加一些规范中没有描述的信息到栈帧之中，例如和调试相关的信息，这部分信息完全取决于不同的虚拟机实现。在实际开发中，一般会把动态连接，方法返回地址与其他附加信息一起归为一类，称为栈帧信息。</p>
+</li>
+</ol>
+<h4 id="5-本地方法栈"><a href="#5-本地方法栈" class="headerlink" title="5.本地方法栈"></a>5.本地方法栈</h4><p>一个支持native方法调用的JVM实现，需要有这样一个数据区，就是本地方法栈，Java官方对于本地方法的定义为methods written in a language other than the Java programming language，就是使用非Java语言实现的方法，但是通常我们指的一般为C或者C++，因此这个栈也有着C栈这一称号。一个不支持本地方法执行的JVM没有必要实现这个数据区域。本地方法栈基本和JVM栈一样，其大小也是可以设置为固定值或者动态增加，因此也会对应抛出StackOverflowError和OutOfMemoryError错误。<br>在HotSopt虚拟机中直接就把本地方法栈和Java栈合二为一。</p>
+<h4 id="6-Java堆"><a href="#6-Java堆" class="headerlink" title="6.Java堆"></a>6.Java堆</h4><p>Java堆（Java Heap）是Java虚拟机所管理的内存中<strong>最大</strong>的一块。Java堆是被所有线程共享的一块内存区域，在虚拟机启动时创建。此内存区域的唯一目的就是存放对象实例，<strong>几乎所有的对象实例都在这里分配内存</strong>。</p>
+<p>Java堆是垃圾收集器管理的主要区域，因此很多时候也被称做“<strong>GC堆</strong>”。如果从内存回收的角度看，由于现在收集器基本都是采用的分代收集算法，所以Java堆中还可以细分为：<strong>新生代和老年代；再细致一点的有Eden空间、From Survivor空间、To Survivor空间等。</strong></p>
+<p>根据Java虚拟机规范的规定，Java堆可以处于物理上不连续的内存空间中，只要逻辑上是连续的即可，就像我们的磁盘空间一样。在实现时，既可以实现成固定大小的，也可以是可扩展的，不过当前主流的虚拟机都是按照可扩展来实现的（通过-Xmx和-Xms控制）。</p>
+<p>如果在堆中没有内存完成实例分配，并且堆也无法再扩展时，将会抛出OutOfMemoryError异常。</p>
+<h4 id="7-方法区"><a href="#7-方法区" class="headerlink" title="7.方法区"></a>7.方法区</h4><p>方法区（Method Area）与Java堆一样，是各个线程共享的内存区域，<strong>它用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。</strong>虽然Java虚拟机规范把方法区描述为堆的一个逻辑部分，但是它却有一个别名叫做Non-Heap（非堆），目的应该是与Java堆区分开来。</p>
+<p>对于习惯在HotSpot虚拟机上开发和部署程序的开发者来说，很多人愿意把方法区称为“永久代”（Permanent Generation），本质上两者并不等价，仅仅是因为HotSpot虚拟机的设计团队选择把GC分代收集扩展至方法区，或者说使用永久代来实现方法区而已。</p>
+<p>Java虚拟机规范对这个区域的限制非常宽松，除了和Java堆一样不需要连续的内存和可以选择固定大小或者可扩展外，还可以选择不实现垃圾收集。相对而言，垃圾收集行为在这个区域是比较少出现的，但并非数据进入了方法区就如永久代的名字一样“永久”存在了。这个区域的内存回收目标主要是针对常量池的回收和对类型的卸载，一般来说这个区域的回收“成绩”比较难以令人满意，尤其是类型的卸载，条件相当苛刻，但是这部分区域的回收确实是有必要的。</p>
+<p>根据Java虚拟机规范的规定，当方法区无法满足内存分配需求时，将抛出OutOfMemoryError异常。</p>
+<p>所有的对象在实例化后的整个运行周期内，都被存放在堆内存中。堆内存又被划分成不同的部分：伊甸区(Eden)，幸存者区域(Survivor Sapce)，老年代（Old Generation Space）。</p>
+<p>方法的执行都是伴随着线程的。原始类型的本地变量以及引用都存放在线程栈中。而引用关联的对象比如String，都存在在堆中。</p>
+<h4 id="8-运行时常量池"><a href="#8-运行时常量池" class="headerlink" title="8.运行时常量池"></a>8.运行时常量池</h4><ul>
+<li><strong>运行时常量池是方法区的一部分，</strong>所以也是全局共享的。</li>
+<li><strong>其作用是存储 Java 类文件常量池中的符号信息。</strong></li>
+<li><strong>class 文件中存在常量池(非运行时常量池)，其在编译阶段就已经确定；JVM 规范对 class 文件结构有着严格的规范，必须符合此规范的 class 文件才会被 JVM 认可和装载。</strong></li>
+<li><strong>运行时常量池</strong> 中保存着一些 class 文件中描述的符号引用，同时还会将这些符号引用所翻译出来的直接引用存储在 <strong>运行时常量池</strong> 中。</li>
+<li><strong>运行时常量池相对于 class 常量池一大特征就是其具有动态性，Java 规范并不要求常量只能在运行时才产生，也就是说运行时常量池中的内容并不全部来自 class 常量池，class 常量池并非运行时常量池的唯一数据输入口；在运行时可以通过代码生成常量并将其放入运行时常量池中,比如调用String的intern()方法。</strong></li>
+<li>同方法区一样，当运行时常量池无法申请到新的内存时，将抛出 OutOfMemoryError 异常。</li>
+</ul>
+<h4 id="9-直接内存"><a href="#9-直接内存" class="headerlink" title="9.直接内存"></a>9.直接内存</h4><p>直接内存并不是虚拟机运行时数据区的一部分，也不是Java 虚拟机规范中农定义的内存区域。在JDK1.4 中新加入了NIO(New Input/Output)类，引入了一种基于通道(Channel)与缓冲区（Buffer）的I/O 方式，它可以使用native 函数库直接分配堆外内存，然后通过一个存储在Java堆中的DirectByteBuffer 对象作为这块内存的引用进行操作。这样能在一些场景中显著提高性能，因为避免了在Java堆和Native堆中来回复制数据。</p>
+<p><strong>本机直接内存的分配不会受到Java 堆大小的限制，受到本机总内存大小限制</strong></p>
+<p><strong>配置虚拟机参数时，不要忽略直接内存 防止出现OutOfMemoryError异常</strong></p>
+<p><strong>内容摘自文章</strong>：《深入理解Java虚拟机》 –周志明</p>
 
             </div>
             <hr/>
@@ -406,7 +457,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://kevin8719.github.io/2020/03/04/SpringDataJPA%E5%8E%9F%E7%94%9Fsql%E6%9F%A5%E8%AF%A2/">https://kevin8719.github.io/2020/03/04/SpringDataJPA%E5%8E%9F%E7%94%9Fsql%E6%9F%A5%E8%AF%A2/</a>
+                    <a href="https://kevin8719.github.io/2020/03/07/JVM-%E4%B8%80-java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F/">https://kevin8719.github.io/2020/03/07/JVM-%E4%B8%80-java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -444,8 +495,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/JPA/">
-                                    <span class="chip bg-color">JPA</span>
+                                <a href="/tags/JVM/">
+                                    <span class="chip bg-color">JVM</span>
                                 </a>
                             
                         </div>
@@ -486,9 +537,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2020/03/07/JVM-%E4%B8%80-java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F/">
                     <div class="card-image">
@@ -506,9 +558,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-07
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-07
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -521,6 +573,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -539,32 +592,33 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/03/02/mysql%E4%B8%AD%E7%9A%84%E9%94%81/">
+                <a href="/2020/03/04/SpringDataJPA%E5%8E%9F%E7%94%9Fsql%E6%9F%A5%E8%AF%A2/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="mysql中的锁">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="SpringDataJPA原生sql查询">
                         
-                        <span class="card-title">mysql中的锁</span>
+                        <span class="card-title">SpringDataJPA原生sql查询</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            在计算机科学中，锁是在执行多线程时用于强行限制资源访问的同步机制，即用于在并发控制中保证对互斥要求的满足。
-了解Java的人都清楚,在高并发或者异步任务中的锁机制异常重要,当然当我们访问持久层数据库的时候,也会有很多类似锁机制,就拿MySQ
+                            随着技术的发展,持久层框架也越来越趋于成熟,从Mybatis到JPA,新的技术都是使我们使用起来更加方便简单.就拿
+JPA来说,由于JPA自带的方法可以满足大部分日常开发中的crud,所以深得程序员们的喜爱,但是,有利就有弊.
+近日我在开发
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-02
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-04
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/MySQL/" class="post-category">
-                                    MySQL
+                            <a href="/categories/%E6%8C%81%E4%B9%85%E5%B1%82/" class="post-category">
+                                    持久层
                                 </a>
                             
                             
@@ -574,8 +628,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/MySQL/">
-                        <span class="chip bg-color">MySQL</span>
+                    <a href="/tags/JPA/">
+                        <span class="chip bg-color">JPA</span>
                     </a>
                     
                 </div>
